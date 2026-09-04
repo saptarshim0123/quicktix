@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from app.database import engine
+from sqlalchemy import text
 
 app = FastAPI(
     title="QuickTix ticket booking API",
@@ -9,4 +11,6 @@ app = FastAPI(
 
 @app.get("/")
 async def root():
+    async with engine.connect() as conn:
+        await conn.execute(text("SELECT 1"))
     return {"message": "Welcome to the QuickTix ticket booking API!"}

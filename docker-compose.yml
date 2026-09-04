@@ -3,9 +3,9 @@ services:
     image: postgres:16-alpine
     container_name: quicktix-db
     environment:
-      POSTGRES_USER: quicktix_user
-      POSTGRES_PASSWORD: quicktix_password
-      POSTGRES_DB: quicktix_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -16,12 +16,12 @@ services:
     container_name: quicktix-pgadmin
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: saptarshim0123@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: Sonu2003
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
       - "8080:80"
     depends_on:
-      - db 
+      - db
 
 volumes:
   postgres_data:
