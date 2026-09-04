@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: quicktix-db
+    environment:
+      POSTGRES_USER: quicktix_user
+      POSTGRES_PASSWORD: quicktix_password
+      POSTGRES_DB: quicktix_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: quicktix-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: saptarshim0123@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Sonu2003
+    ports:
+      - "8080:80"
+    depends_on:
+      - db 
+
+volumes:
+  postgres_data:
